@@ -26,7 +26,7 @@ const App = () => {
       feedback: string;
     },
     action: { type: string }
-  ) {
+  ):any {
     if (action.type === "ChechNumber") {
       if (randomNumber > inputRef.current.value) {
         return {
