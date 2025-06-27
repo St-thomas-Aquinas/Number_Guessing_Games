@@ -14,7 +14,7 @@ random();
 //end of the function to generete random number
 
 const App = () => {
-  const inputRef = useRef(null);
+  const inputRef = useRef(null)&&useRef(0);
   const [results, dispatch] = useReducer(reducerFunction, {
     feedback: "Start Game",
     trial: 10,
@@ -28,19 +28,19 @@ const App = () => {
     action: { type: string }
   ):any {
     if (action.type === "ChechNumber") {
-      if (randomNumber > inputRef.current.value) {
+      if (randomNumber > inputRef.current.valueOf) {
         return {
           ...state,
           feedback: "Your guess is too low",
           trial: state.trial - 1,
         };
-      } else if (randomNumber < inputRef.current.value) {
+      } else if (randomNumber < inputRef.current.valueOf) {
         return {
           ...state,
           feedback: "Your guess is too high",
           trial: state.trial - 1,
         };
-      } else if (randomNumber == inputRef.current.value) {
+      } else if (randomNumber == inputRef.current.valueOf) {
         return { ...state, feedback: "You won the game" };
       }
     }
