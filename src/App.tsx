@@ -17,8 +17,7 @@ random();
 //end of the function to generete random number
 
 const App = () => {
-  
-  const { register, getValues } = useForm<FormInputs>();
+  const {register, getValues } = useForm<FormInputs>();
   const [results, dispatch] = useReducer(reducerFunction, {
     feedback: "Start Game",
     trial: 10,
