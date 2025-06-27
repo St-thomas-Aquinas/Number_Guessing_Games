@@ -1,8 +1,11 @@
 import { useReducer } from "react";
-import { useRef } from "react";
 import "./App.css";
+import { useForm } from "react-hook-form";
 //variables
 let randomNumber: number = 0;
+type FormInputs = {
+  Guess:number 
+}
 
 //function to generate Random Number
 function random() {
@@ -14,7 +17,8 @@ random();
 //end of the function to generete random number
 
 const App = () => {
-  const inputRef = useRef(null||0);
+  
+  const { register, getValues } = useForm<FormInputs>();
   const [results, dispatch] = useReducer(reducerFunction, {
     feedback: "Start Game",
     trial: 10,
@@ -28,19 +32,19 @@ const App = () => {
     action: { type: string }
   ):any {
     if (action.type === "ChechNumber") {
-      if (randomNumber > inputRef.current.valueOf) {
+      if (randomNumber > getValues("Guess")) {
         return {
           ...state,
           feedback: "Your guess is too low",
           trial: state.trial - 1,
         };
-      } else if (randomNumber < inputRef.current.valueOf) {
+      } else if (randomNumber <  getValues("Guess")) {
         return {
           ...state,
           feedback: "Your guess is too high",
           trial: state.trial - 1,
         };
-      } else if (randomNumber == inputRef.current.valueOf) {
+      } else if (randomNumber ==  getValues("Guess")) {
         return { ...state, feedback: "You won the game" };
       }
     }
@@ -54,11 +58,9 @@ const App = () => {
         New Game
       </button>
       <p>Trials: {results.trial}</p>
-      <input
-        ref={inputRef}
-        type="number"
-        disabled={results.trial == 0 ? true : false}
-      />
+      <form><input {...register("Guess")} /></form>
+      
+     
       <p> {results.feedback}</p>
       <button
         onClick={() => dispatch({ type: "ChechNumber" })}
