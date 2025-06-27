@@ -14,7 +14,7 @@ random();
 //end of the function to generete random number
 
 const App = () => {
-  const inputRef = useRef(0);
+  const inputRef = useRef(null);
   const [results, dispatch] = useReducer(reducerFunction, {
     feedback: "Start Game",
     trial: 10,
