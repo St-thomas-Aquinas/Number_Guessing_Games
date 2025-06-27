@@ -57,7 +57,7 @@ const App = () => {
         New Game
       </button>
       <p>Trials: {results.trial}</p>
-      <form><input {...register("Guess")} /></form>
+      <form><input type = "number" {...register("Guess")} /></form>
       
      
       <p> {results.feedback}</p>
